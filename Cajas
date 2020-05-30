@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+
+struct  Nodo{
+ int codigo;
+ Nodo *siguiente;
+};
+
+void agregar(Nodo *&,int);
+void sacar(Nodo *&,int &);
+
+//void agregar2(Nodo *&,Nodo*&,int);
+//bool agregar3(Nodo *);
+//void sacar1(Nodo *&,Nodo *&,int &);
+
+int main()
+{
+Nodo *pilas=NULL;
+int codigo;
+ 
+cout<<"Ingrese codigo de caja: "; cin>>codigo;
+agregar(pilas, codigo);
+
+cout<<"Ingrese codigo de caja: "; cin>>codigo;
+agregar(pilas, codigo);
+
+cout <<"Despachar cajas: ";
+while(pilas!=NULL){
+    sacar(pilas, codigo);
+    if(pilas!=NULL){
+        cout<<codigo<<" , ";
+    }else{
+        cout<<codigo<<" . ";
+    }
+}
+return 0;
+}
+
+void agregar(Nodo *&pilas,int n){
+
+    Nodo *nuevo_nodo = new Nodo();
+    nuevo_nodo->codigo=n;
+    nuevo_nodo->siguiente = pilas;
+    pilas=nuevo_nodo;
+
+    cout<<"\nCaja "<<n<<" Registrada en almacen!"<<endl;
+}
+void sacar(Nodo *&pilas,int &n){
+
+    Nodo *aux=pilas;
+    n=aux->codigo;
+    pilas=aux->siguiente;
+    delete aux;
+}
+
+/*bool agregar3(Nodo *frente){
+
+    return (frente==NULL)? true : false;
+}
+/*
+/*void agregar2(Nodo *&frente,Nodo *&fin,int n){
+
+    Nodo *nuevo_nodo=new Nodo();
+
+     nuevo_nodo-> dato=n;
+
+    nuevo_nodo-> siguiente=NULL;
+
+    if(lista_vacia(frente)){        frente=nuevo_nodo; }
+
+    else{        fin->siguiente=nuevo_nodo; }
+
+    fin=nuevo_nodo;
+
+    cout<<"\tElemento "<<n<<" insertado correctamente"<<endl;
+}
+
+void sacar1(Nodo *&frente,Nodo *&fin,int &n){
+
+    n =frente->dato;
+
+    Nodo *aux=frente;
+
+    if(frente==fin){        frente=NULL;        fin=NULL;    }
+
+    else{        frente=frente->siguiente;    }
+
+    delete aux;
+}
+*/
