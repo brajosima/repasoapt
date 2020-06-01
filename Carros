@@ -1,0 +1,90 @@
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+using namespace std;
+
+struct pilas {
+int d;
+pilas *a;
+} *c, *e;
+
+void menu(void);
+void ingreso(void);
+void salida(void);
+void actualizar(void);
+
+main(){
+    menu();
+}
+
+void menu(void){
+    int y, opcion;
+    for(;;){
+cout << "\n 1. Ingresar carro";
+cout << "\n 2. Salida de carro";
+cout<<"\n 3. Salir";
+cout<<"\n Ingrese opcion: "; cin>>opcion;
+switch (opcion){
+    case 1: 
+    ingreso();
+    break; 
+    case 2: 
+    salida();
+    break;
+    case 3: exit(1);
+    default: cout << "\n Error!";break;
+}
+actualizar();
+cout<<"\nContinuar";
+getch();
+}
+}
+
+void ingreso(void){
+if(!c){
+    c=new(pilas);
+    cout<<"Placa Vehicular: ";
+    cin>>c->d;
+    c->a=NULL;
+    return;
+}
+
+e=new(pilas);
+cout<<"\nPlaca Vehicular: ";
+cin>>e->d;
+e->a=c;
+c=e;
+}
+
+void salida(void){
+    if(!c){
+        cout<<"\n\nEstacionamiento vacio!";
+        return;
+    }
+    e=new(pilas);
+    e=c;
+    cout<<"\n\nCarro saliendo!"<<e->d;
+    c=e->a;
+    delete(e);
+}
+
+void actualizar(void){
+    int y=2, i,temp=0;
+    e=c;
+    while (e){
+        temp++;
+        e=e->a;
+    }
+    for (i=0; i<=temp;i++){
+        cout << " ";
+    }
+    i=0;
+    e=c;
+while(e){
+    cout<<"\n";
+    cout<<++i<<" - "<<e->d;
+    e=e->a;
+}
+}
